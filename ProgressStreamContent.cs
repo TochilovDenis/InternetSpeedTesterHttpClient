@@ -3,9 +3,10 @@ using System.Net;
 
 namespace InternetSpeedTesterHttpClient
 {
-    // КЛАСС ДЛЯ ОТСЛЕЖИВАНИЯ ПРОГРЕССА
-    // Кастомная реализация StreamContent с callback'ом для отслеживания прогресса загрузки
-    // Позволяет в реальном времени отслеживать процесс передачи данных
+    /// <summary>
+    /// Кастомная реализация StreamContent с callback'ом для отслеживания прогресса загрузки
+    /// Позволяет в реальном времени отслеживать процесс передачи данных
+    /// </summary>
     public class ProgressStreamContent : StreamContent
     {
         private readonly Stream _stream;          // Исходный поток данных для отправки
@@ -23,7 +24,9 @@ namespace InternetSpeedTesterHttpClient
             _stopwatch = Stopwatch.StartNew();   // Запуск таймера измерения времени
         }
 
-        // Переопределение метода сериализации потока с отслеживанием прогресса
+        /// <summary>
+        /// Переопределение метода сериализации потока с отслеживанием прогресса
+        /// </summary>
         protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
             var buffer = new byte[8192];  // Буфер 8KB для чтения/записи данных

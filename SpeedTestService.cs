@@ -17,7 +17,7 @@ namespace InternetSpeedTesterHttpClient
         /// </summary>
         public SpeedTestService()
         {
-
+            // Настройка HttpClient с оптимальными параметрами для тестирования
             _httpClient = new HttpClient(new HttpClientHandler
             {
                 AllowAutoRedirect = true,        // Разрешить автоматические перенаправления (301, 302)
@@ -32,7 +32,9 @@ namespace InternetSpeedTesterHttpClient
             _diskService = new YandexDiskService();         // Инициализация сервиса диска
         }
 
-        // Измерение сетевой задержки (ping) до указанного URL
+        /// <summary>
+        /// Измерение сетевой задержки (ping)
+        /// </summary>
         public async Task<long> MeasurePingAsync(string url, CancellationToken cancellationToken)
         {
             var stopwatch = Stopwatch.StartNew(); // Запуск таймера
@@ -61,7 +63,9 @@ namespace InternetSpeedTesterHttpClient
             }
         }
 
-        // Измерение скорости скачивания файла
+        /// <summary>
+        /// Основной метод измерения скорости скачивания
+        /// </summary>
         public async Task<double> MeasureDownloadSpeedAsync(string url, string accessToken,
             Action<int, long, TimeSpan> progressCallback, CancellationToken cancellationToken)
         {
@@ -149,7 +153,9 @@ namespace InternetSpeedTesterHttpClient
             }
         }
 
-        // Измерение скорости чтения локального файла (для тестирования без сети)
+        /// <summary>
+        /// Измерение скорости чтения локального файла (для тестирования без сети)
+        /// </summary>
         public async Task<double> MeasureLocalFileSpeed(string fileUrl, Action<int, long, TimeSpan> progressCallback,
             CancellationToken cancellationToken)
         {
@@ -203,7 +209,9 @@ namespace InternetSpeedTesterHttpClient
             }
         }
 
-        // Измерение скорости загрузки файла на Яндекс.Диск
+        /// <summary>
+        /// Измерение скорости загрузки файла на Яндекс.Диск
+        /// </summary>
         public async Task<double> MeasureUploadSpeedAsync(string filePath, string accessToken,
             Action<long, long, TimeSpan, long> progressCallback, CancellationToken cancellationToken)
         {
@@ -251,7 +259,9 @@ namespace InternetSpeedTesterHttpClient
             }
         }
 
-        // Обработка HTTP исключений с понятными сообщениями
+        /// <summary>
+        /// Обработка HTTP исключений с понятными сообщениями
+        /// </summary>
         private Exception HandleHttpException(HttpRequestException ex)
         {
             switch (ex.StatusCode)
@@ -269,7 +279,9 @@ namespace InternetSpeedTesterHttpClient
             }
         }
 
-        // Освобождение ресурсов HttpClient
+        /// <summary>
+        /// Освобождение ресурсов HttpClient
+        /// </summary>
         public void Dispose()
         {
             _httpClient?.Dispose();
